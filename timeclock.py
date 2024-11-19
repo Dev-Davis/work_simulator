@@ -20,18 +20,22 @@ def clock_in():
     if clocked_in:
         while int(worker_hours) <= int(shift):
             if worker_hours == 2 or worker_hours == 8:
-                # time.sleep(2)
+                time.sleep(2)
                 break_time()
+                time.sleep(2)
                 worker_hours = worker_hours + 1
             elif worker_hours == 5:
-                # time.sleep(2)
+                time.sleep(2)
                 start_lunch()
+                time.sleep(2)
                 end_lunch()
+                time.sleep(2)
                 worker_hours = worker_hours + 1
             else:
-                # time.sleep(2)
+                print("Working...")
+                time.sleep(2)
                 current_pay = hourly_pay * worker_hours
-                print(f"{current_pay} - {logged_time}")
+                # print(f"{current_pay} - {logged_time}")
                 worker_hours = worker_hours + 1
                 # continue
 
@@ -51,12 +55,12 @@ def clock_in():
                         sys.exit()
             else:
                 print("Overtime denied")
-                clock_out()
+                clock_out(logged_time)
                 sys.exit()
 
 
 def clock_out(logged_time):
-    print(f"Clock you clocked out at {logged_time}")
+    print(f"You clocked out at {logged_time}")
     sys.exit()
 
 
@@ -75,24 +79,27 @@ def break_time():
 
 
 def overtime(pay, approved):
-
+    current_time = datetime.now()
+    logged_time = current_time.strftime("%H:%M")
     oth = int(1)
     ot_hours = int(input('How many overtime hours are you working? '))
 
-    while ot_hours > 4:
-        print("You can only work 4 overtime hours")
+    if ot_hours > 4:
+        print("You can only work 4 hours over")
+        clock_out(logged_time)
+    else:
+        while approved:
+            if oth <= ot_hours:
+                ot_pay = pay + pay/2
+                time.sleep(2)
+                print(f"Worked {oth} overtime hour...")
+                oth = oth + 1
+                time.sleep(1)
+            else:
+                approved = False
 
-    while approved:
-        if oth <= ot_hours:
-            oth = oth + 1
-            ot_pay = pay + pay/2
-            time.sleep(2)
-            print(f"{ot_pay} - {ot_hours}")
-        else:
-            approved = False
-
-    final_ot = ot_hours * ot_pay
-    print(final_ot)
+        final_ot = ot_hours * ot_pay
+        print(final_ot)
 
 
 def work():
