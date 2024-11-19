@@ -20,20 +20,20 @@ def clock_in():
     if clocked_in:
         while int(worker_hours) <= int(shift):
             if worker_hours == 2 or worker_hours == 8:
-                # time.sleep(2)
+                time.sleep(2)
                 break_time()
-                # time.sleep(2)
+                time.sleep(2)
                 worker_hours = worker_hours + 1
             elif worker_hours == 5:
-                # time.sleep(2)
+                time.sleep(2)
                 start_lunch()
-                # time.sleep(2)
+                time.sleep(2)
                 end_lunch()
-                # time.sleep(2)
+                time.sleep(2)
                 worker_hours = worker_hours + 1
             else:
                 print("Working...")
-                # time.sleep(2)
+                time.sleep(2)
                 current_pay = hourly_pay * worker_hours
                 # print(f"{current_pay} - {logged_time}")
                 worker_hours = worker_hours + 1
