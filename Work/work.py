@@ -1,7 +1,6 @@
 import time
 
 import timeclock
-import sys
 
 print("""
 /////////////////
