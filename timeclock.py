@@ -11,8 +11,6 @@ def clock_in():
     current_time = datetime.now()
     logged_time = current_time.strftime("%H:%M")
     clocked_in = True
-    # current_pay = 0
-    approved_ot = False
     worker_hours = 0
 
     print(f"You clocked in at {logged_time}")
@@ -34,10 +32,8 @@ def clock_in():
             else:
                 print("Working...")
                 time.sleep(2)
-                current_pay = hourly_pay * worker_hours
-                # print(f"{current_pay} - {logged_time}")
+                # current_pay = hourly_pay * worker_hours
                 worker_hours = worker_hours + 1
-                # continue
 
         if int(worker_hours) > int(shift):
             overtime_input = input("Would you like overtime? y/n ")
@@ -66,7 +62,6 @@ def clock_out(logged_time):
 
 def start_lunch():
     print('Start lunch')
-    # time.sleep(30)
 
 
 def end_lunch():
