@@ -92,6 +92,7 @@ def vend(price, spent, name):
     change = float(spent) - float(price)
     remaining = price - spent
     if change < 0.00:
+        time.sleep(1)
         print(f"Not enough funds. Please insert {remaining:.2f}")
         total = needed_funds(remaining, spent)
 
@@ -102,85 +103,91 @@ def vend(price, spent, name):
     else:
         print(f"Vending {name}...")
         total_change = total - price
-
+        time.sleep(2)
         if total_change == 0.00:
             print("Have a dope day! ^.^")
+            sys.exit()
         else:
             time.sleep(2)
             print("Please collect snacks and change...")
             print(f"Change: {total_change:.2f}")
+            time.sleep(2)
             print("Have a dope day! ^.^")
-
+            sys.exit()
 
 def selection_option(spent):
-    selection = input("Please select an item... \n").capitalize()
+
     time.sleep(1)
+    valid = True
 
-    match selection:
-        case "A1":
-            name = "Nacho Cheese Doritos"
-            price = 1.75
-            vend(price, spent, name)
-        case "A2":
-            name = "Lays Salt and Vinegar"
-            price = 1.75
-            vend(price, spent, name)
-        case "A3":
-            name = "Cooler Ranch Doritos"
-            price = 1.75
-            vend(price, spent, name)
-        case "A4":
-            name = "Flamin' Hot Popcorn"
-            price = 1.75
-            vend(price, spent, name)
-        case "A5":
-            name = "Smartfood White Cheddar Popcorn"
-            price = 1.75
-            vend(price, spent, name)
-        case "B1":
-            name = "Nerds Gummy Ropes"
-            price = 1.50
-            vend(price, spent, name)
-        case "B2":
-            name = "Trail Mix"
-            price = 1.50
-            vend(price, spent, name)
-        case "B3":
-            name = "Skittles"
-            price = 1.20
-            vend(price, spent, name)
-        case "B4":
-            name = "Oreo"
-            price = 1.50
-            vend(price, spent, name)
-        case "B5":
-            name = "3 Musketeers"
-            price = 1.20
-            vend(price, spent, name)
-        case "C1":
-            name = "Reese's"
-            price = 1.55
-            vend(price, spent, name)
-        case "C2":
-            name = "Kit Kat"
-            price = 1.55
-            vend(price, spent, name)
-        case "C3":
-            name = "Twix"
-            price = 1.55
-            vend(price, spent, name)
-        case "C4":
-            name = "Snickers"
-            price = 1.55
-            vend(price, spent, name)
-        case "C5":
-            name = "Pop Tarts"
-            price = 1.55
-            vend(price, spent, name)
-        case _:
-            print("Please make a valid selection...")
+    while valid:
+        selection = input("Please select an item... \n").capitalize()
+        match selection:
+            case "A1":
+                name = "Nacho Cheese Doritos"
+                price = 1.75
+                vend(price, spent, name)
+            case "A2":
+                name = "Lays Salt and Vinegar"
+                price = 1.75
+                vend(price, spent, name)
+            case "A3":
+                name = "Cooler Ranch Doritos"
+                price = 1.75
+                vend(price, spent, name)
+            case "A4":
+                name = "Flamin' Hot Popcorn"
+                price = 1.75
+                vend(price, spent, name)
+            case "A5":
+                name = "Smartfood White Cheddar Popcorn"
+                price = 1.75
+                vend(price, spent, name)
+            case "B1":
+                name = "Nerds Gummy Ropes"
+                price = 1.50
+                vend(price, spent, name)
+            case "B2":
+                name = "Trail Mix"
+                price = 1.50
+                vend(price, spent, name)
+            case "B3":
+                name = "Skittles"
+                price = 1.20
+                vend(price, spent, name)
+            case "B4":
+                name = "Oreo"
+                price = 1.50
+                vend(price, spent, name)
+            case "B5":
+                name = "3 Musketeers"
+                price = 1.20
+                vend(price, spent, name)
+            case "C1":
+                name = "Reese's"
+                price = 1.55
+                vend(price, spent, name)
+            case "C2":
+                name = "Kit Kat"
+                price = 1.55
+                vend(price, spent, name)
+            case "C3":
+                name = "Twix"
+                price = 1.55
+                vend(price, spent, name)
+            case "C4":
+                name = "Snickers"
+                price = 1.55
+                vend(price, spent, name)
+            case "C5":
+                name = "Pop Tarts"
+                price = 1.55
+                vend(price, spent, name)
+            case _:
+                print("func - Please enter a valid selection...")
+                continue
 
-    return price
+    valid = False
 
 
 def collect_money():
@@ -189,24 +196,28 @@ def collect_money():
     valid = True
 
     while collected < 1.00:
-        spent = int(input(f"Insert money... \n"))
+        spent = input(f"Insert money... \n")
         if valid:
             time.sleep(0.3)
-            match int(spent):
-                case 1:
-                    collected = collected + 1.00
-                    print(f"{collected:.2f}")
-                case 5:
-                    collected = collected + 0.05
-                    print(f"{collected:.2f}")
-                case 10:
-                    collected = collected + 0.10
-                    print(f"{collected:.2f}")
-                case 25:
-                    collected = collected + 0.25
-                    print(f"{collected:.2f}")
-                case _:
-                    print("Please insert $1 or correct change")
+            try:
+                match int(spent):
+                    case 1:
+                        collected = collected + 1.00
+                        print(f"{collected:.2f}")
+                    case 5:
+                        collected = collected + 0.05
+                        print(f"{collected:.2f}")
+                    case 10:
+                        collected = collected + 0.10
+                        print(f"{collected:.2f}")
+                    case 25:
+                        collected = collected + 0.25
+                        print(f"{collected:.2f}")
+                    case _:
+                        print("Please insert $1 or correct change")
+            except ValueError:
+                print('Please enter a numeric value')
+                continue
 
     vending_items()
     selection_option(collected)
